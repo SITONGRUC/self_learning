@@ -7,8 +7,7 @@
 * How to count the elements number in a tensor
 
 ```python
-def hello_world():
-    print("Hello, world!")
+tensor.shape
 ```
 
 
