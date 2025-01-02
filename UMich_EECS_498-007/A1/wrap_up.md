@@ -42,3 +42,76 @@ w.cuda()
 
 
 
+## KNN.py
+
+* How to flat a tensor
+
+```python
+ x_test.reshape(num_test,-1)
+```
+
+
+* the differenc between torch.cat() and torch.stack()
+
+torch.cat would not add dim while torch.stack() do 
+
+
+* torch.repeat(), you should pass the arugment to declain that which dim you would like to repeat on . 
+
+* below code should be paid attention 
+
+```python
+sum_train = (x_train_flat**2).sum(dim=1, keepdim=True) 
+```
+
+
+* how to write a class
+
+check the code below 
+
+```python
+
+class KnnClassifier:
+
+    def __init__(self, x_train: torch.Tensor, y_train: torch.Tensor):
+
+        self.x_train = x_train
+        self.y_train = y_train 
+
+    def predict(self, x_test: torch.Tensor, k: int = 1):
+
+        y_test_pred = None
+        dists = compute_distances_no_loops(x_train = self.x_train,x_test = x_test)
+        y_test_pred = predict_labels(dists=dists,y_train=self.y_train,k = k)
+        return y_test_pred
+
+    def check_accuracy(
+        self,
+        x_test: torch.Tensor,
+        y_test: torch.Tensor,
+        k: int = 1,
+        quiet: bool = False
+    ):
+
+        y_test_pred = self.predict(x_test, k=k)
+        num_samples = x_test.shape[0]
+        num_correct = (y_test == y_test_pred).sum().item()
+        accuracy = 100.0 * num_correct / num_samples
+        msg = (
+            f"Got {num_correct} / {num_samples} correct; "
+            f"accuracy is {accuracy:.2f}%"
+        )
+        if not quiet:
+            print(msg)
+        return accuracy
+
+
+```
+
+
+
+
+* torch.chunk() return a list of tensor
+
+
+
