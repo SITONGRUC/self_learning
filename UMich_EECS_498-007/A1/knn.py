@@ -229,50 +229,15 @@ def predict_labels(dists: torch.Tensor, y_train: torch.Tensor, k: int = 1):
 class KnnClassifier:
 
     def __init__(self, x_train: torch.Tensor, y_train: torch.Tensor):
-        """
-        Create a new K-Nearest Neighbor classifier with the specified training
-        data. In the initializer we simply memorize the provided training data.
 
-        Args:
-            x_train: Tensor of shape (num_train, C, H, W) giving training data
-            y_train: int64 Tensor of shape (num_train, ) giving training labels
-        """
-        ######################################################################
-        # TODO: Implement the initializer for this class. It should perform  #
-        # no computation and simply memorize the training data in            #
-        # `self.x_train` and `self.y_train`, accordingly.                    #
-        ######################################################################
-        # Replace "pass" statement with your code
         self.x_train = x_train
         self.y_train = y_train 
-        ######################################################################
-        #                         END OF YOUR CODE                           #
-        ######################################################################
 
     def predict(self, x_test: torch.Tensor, k: int = 1):
-        """
-        Make predictions using the classifier.
 
-        Args:
-            x_test: Tensor of shape (num_test, C, H, W) giving test samples.
-            k: The number of neighbors to use for predictions.
-
-        Returns:
-            y_test_pred: Tensor of shape (num_test,) giving predicted labels
-                for the test samples.
-        """
         y_test_pred = None
-        ######################################################################
-        # TODO: Implement this method. You should use the functions you      #
-        # wrote above for computing distances (use the no-loop variant) and  #
-        # to predict output labels.                                          #
-        ######################################################################
-        # Replace "pass" statement with your code
         dists = compute_distances_no_loops(x_train = self.x_train,x_test = x_test)
         y_test_pred = predict_labels(dists=dists,y_train=self.y_train,k = k)
-        ######################################################################
-        #                         END OF YOUR CODE                           #
-        ######################################################################
         return y_test_pred
 
     def check_accuracy(
@@ -282,21 +247,7 @@ class KnnClassifier:
         k: int = 1,
         quiet: bool = False
     ):
-        """
-        Utility method for checking the accuracy of this classifier on test
-        data. Returns the accuracy of the classifier on the test data, and
-        also prints a message giving the accuracy.
 
-        Args:
-            x_test: Tensor of shape (num_test, C, H, W) giving test samples.
-            y_test: int64 Tensor of shape (num_test,) giving test labels.
-            k: The number of neighbors to use for prediction.
-            quiet: If True, don't print a message.
-
-        Returns:
-            accuracy: Accuracy of this classifier on the test data, as a
-                percent. Python float in the range [0, 100]
-        """
         y_test_pred = self.predict(x_test, k=k)
         num_samples = x_test.shape[0]
         num_correct = (y_test == y_test_pred).sum().item()
