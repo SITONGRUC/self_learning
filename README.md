@@ -9,3 +9,10 @@ The link for the class is [here](https://web.eecs.umich.edu/~justincj/teaching/e
 * Assignment one: [link](https://github.com/SITONGRUC/self_learning/tree/main/UMich_EECS_498-007/A1)
 
 * Assignment one wrap up: [link]
+
+
+
+
+
+
+it is running on paid server.
